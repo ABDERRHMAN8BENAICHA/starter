@@ -13,7 +13,7 @@ import { FiLogOut } from 'react-icons/fi';
 import { FooterDashboard } from '@/components/FooterDashboard';
 
 const data = [
-    { title: 'Main', icon: <HomeIcon />, link: '/main' },
+    { title: 'Home', icon: <HomeIcon />, link: '/' },
     { title: 'chart', icon: <SlidesIcon />, link: '/chart' },
     { title: 'Area', icon: <PiMapPinAreaFill />, link: '/area' },
 
@@ -30,9 +30,9 @@ export default function Page() {
         <div className="flex flex-col p-2">
             <main className="flex-1 p-4">
                 <div className="grid gap-4 md:gap-8 lg:gap-12">
-                    <div className="space-y-2 text-right">
-                        <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">مرحباً بك، المشرف</h1>
-                        <p className="text-gray-500 dark:text-gray-400">لديك إمكانية الوصول الكامل.</p>
+                    <div className="space-y-2 ">
+                        <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Welcome, Administrator</h1>
+                        <p className="text-gray-500 dark:text-gray-400">Full accessibility.</p>
                     </div>
                     <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
                         {data.map((item, index) => (
@@ -51,7 +51,7 @@ export default function Page() {
                             variant="destructive"
                             className="flex items-center py-8 rounded-lg border shadow-sm gap-2"
                         >
-                            <span className="ml-2">تسجيل الخروج</span>
+                            <span className="ml-2">logout</span>
                             <FiLogOut className="ml-auto w-4 h-4 opacity-70" />
                         </Button>
                     </div>

@@ -47,8 +47,8 @@ export const slideColumns: ColumnDef<Slide>[] = [
                 variant="ghost"
                 onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
             >
-                تاريخ الانشاء
-                <ArrowUpDown className="ml-2 h-4 w-4" />
+            date create
+                            <ArrowUpDown className="ml-2 h-4 w-4" />
             </Button>
         ),
         cell: ({ row }) => {

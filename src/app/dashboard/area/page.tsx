@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Slide, slideColumns } from './columns'; // Ensure this file exports slideColumns
+import { Slide, slideColumns } from './columns'; 
 import { DataTable } from './data-table';
 
 
@@ -12,7 +12,7 @@ export default function Page({ }) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/slides`);
+                const response = await fetch(`https://0849-154-245-173-235.ngrok-free.app/api/getBysData`);
                 const result = await response.json();
                 if (result.ok) {
                     setData(result.data);
@@ -20,13 +20,13 @@ export default function Page({ }) {
                     setData([]);
                 }
             } catch (error) {
-                console.error('Error fetching data:', error);
+                console.log('Error fetching data:', error);
                 setData([]);
             }
         }
 
         fetchData();
-    }, []); // Empty dependency array ensures this runs only once after the initial render
+    }, []); 
 
     return (
         <section>

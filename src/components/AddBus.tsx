@@ -29,14 +29,15 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover"
-import { format } from "date-fns"
+import { format, getDay } from "date-fns"
 import { cn } from '@/lib/utils';
+import { useRouter } from 'next/navigation';
 
 export default function AddBus({ }) {
     const [loading, setLoading] = useState<boolean>(false);
     // const { push } = useRouter();
-    setLoading(false)
-    const [date, setDate] = React.useState<Date>()
+    const [date, setDate] = useState<Date>()
+    const route = useRouter();
     const FormSchema = z.object({
         name: z
             .string()
@@ -54,32 +55,43 @@ export default function AddBus({ }) {
             name: "",
         },
     });
-
-    async function onSubmit(data: z.infer<typeof FormSchema>) {
-        console.log(data,date);
+    function getDateObject(date: Date, area: string) {
         
+        const dayIndex = getDay(date);
+        
+        const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        
+        const day = days[dayIndex];
+        
+        const timestamp = date.toISOString().slice(0, 19).replace('T', ' ');
+    
+        return {
+            timestamp,
+            area,
+            day,
+        };
+    }
+    async function onSubmit(data: z.infer<typeof FormSchema>) {
+        console.log(getDateObject(date,data.name));
+        setLoading(false)
+
+        ///https://0849-154-245-173-235.ngrok-free.app/api/getBysData/api/get/x/x/x
         // setLoading(true);
-        // try {
-        //     const res = await fetch(`/api`, {
-        //         method: "POST",
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //         },
-        //         body: JSON.stringify({
-        //             name: data.name,
-        //             description: data.description,
-        //         }),
-        //     });
-
-        //     const newData = await res.json();
-        //     console.log(newData);
-
-        //     setLoading(false);
-        //     push("/dashboard");
-        // } catch (error) {
-        //     console.log(error);
-        //     setLoading(false);
-        // }
+        try {
+            const res = await fetch(`https://0849-154-245-173-235.ngrok-free.app/api/get/${getDateObject(date,data.name).timestamp}/${getDateObject(date,data.name).area}/${getDateObject(date,data.name).day}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+    
+            const newData = await res.json();
+            console.log(newData);
+            route.push("/");
+        } catch (error) {
+            console.log(error);
+            setLoading(false);
+        }
     }
 
     return (
@@ -144,4 +156,4 @@ export default function AddBus({ }) {
             </Card>
         </div>
     );
-}
+};
