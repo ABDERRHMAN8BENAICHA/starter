@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Calendar1Icon, LucideSend } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 
 import { Calendar } from "@/components/ui/calendar"
 import {
@@ -34,7 +34,8 @@ import { cn } from '@/lib/utils';
 
 export default function AddBus({ }) {
     const [loading, setLoading] = useState<boolean>(false);
-    const { push } = useRouter();
+    // const { push } = useRouter();
+    setLoading(false)
     const [date, setDate] = React.useState<Date>()
     const FormSchema = z.object({
         name: z
