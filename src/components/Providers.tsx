@@ -8,7 +8,7 @@ type Props = {
 export default function Providers({ children }: Props) {
     return (
         <NextUIProvider>
-            {children}
+                {children}
         </NextUIProvider>
     )
 }

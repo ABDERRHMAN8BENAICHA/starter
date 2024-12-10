@@ -12,13 +12,22 @@ export default function Page({ }) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await fetch(`https://0849-154-245-173-235.ngrok-free.app/api/getBysData`);
+                const response = await fetch(`https://0849-154-245-173-235.ngrok-free.app/api/getBysData`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
                 const result = await response.json();
-                if (result.ok) {
-                    setData(result.data);
-                } else {
-                    setData([]);
-                }
+
+                    setData(result.data)
+                    console.log(response);
+                    console.log(result);
+                    console.log(data);
+                    
+                    
+                
+                
             } catch (error) {
                 console.log('Error fetching data:', error);
                 setData([]);
@@ -26,7 +35,7 @@ export default function Page({ }) {
         }
 
         fetchData();
-    }, []); 
+    }, [data]); 
 
     return (
         <section>
@@ -36,3 +45,6 @@ export default function Page({ }) {
         </section>
     );
 }
+
+
+
